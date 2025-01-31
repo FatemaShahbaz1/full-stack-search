@@ -25,9 +25,45 @@ app.get('/hotels', async (req, res) => {
   try {
     await mongoClient.connect();
     console.log('Successfully connected to MongoDB!');
-    const db = mongoClient.db()
-    const collection = db.collection('hotels');
-    res.send(await collection.find().toArray())
+    const db = mongoClient.db();
+
+
+    let hotels, cities, countries = [];
+
+    const searchText = req.query.search ?? "";
+
+    if (!searchText) {
+      const data = { data: { hotels: [], cities: [], countries: [] }, error: "Missing argument: search" };
+      res.send(data);
+      return;
+    }
+
+    const hotelCollection = db.collection('hotels');
+    const cityCollection = db.collection('cities');
+    const countryCollection = db.collection('countries');
+
+    hotels = await hotelCollection.find({
+      "$or": [
+        { "chain_name": { "$regex": searchText, "$options": "i" } },
+        { "hotel_name": { "$regex": searchText, "$options": "i" } },
+        { "city": { "$regex": searchText, "$options": "i" } },
+        { "country": { "$regex": searchText, "$options": "i" } }
+      ]
+    }).toArray();
+
+    cities = await cityCollection.find({ "name": { "$regex": searchText, "$options": "i" } }).toArray();
+
+    countries = await countryCollection.find({
+      "$or": [
+        { "country": { "$regex": searchText, "$options": "i" } },
+        { "countryisocode": { "$regex": searchText, "$options": "i" } }
+      ]
+    }).toArray();
+
+    const data = { hotels, cities, countries }
+
+    res.send({ data });
+
   } finally {
     await mongoClient.close();
   }
