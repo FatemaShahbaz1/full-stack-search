@@ -90,7 +90,28 @@ For larger or more time-intensive changes, you're welcome to outline your ideas 
 
 <!-- Write-up/conclusion section -->
 
-_When all the behaviour is implemented, feel free to add some observations or conclusions you like to share in the section_
+**API**
+- *Utils Module:* Created a separate module for all the types, interfaces, and schemas. Also, added Zod for validating those schemas. 
+- *SRR*: By using Single Responsibility Principle and Separation of Concern methodology, created separate Controllers, Services and Routes for the Entities of the application.
+- *KISS*: Used the widely known KISS(Keep It Simple, Stupid) design principle of Software Development by writing minimilistic code for what's needed. 
+- *YAGNI*: Used another Software Development Principle called YAGNI(You Ain't Gonna Need It) by not over-complicating the solution, but following the functional requirements as provided. 
+- *Folder Structure:* Improved folder structure of the entire API and used express package in its true capacity. 
+- *View All Feature:* Allowed user to view 5 items in the search bar and use "View all" button to view an extended version of the search. 
+
+**CLIENT**
+- *Debounced Search:* Implemented a debounced search that takes 1000ms after the last key-stroke to begin search. It is to ensure that we are not hammering the database with useless queries. 
+- *TryHackMe Theme:* Used TryHackMe's search as an inspiration and updated the application's theme. 
+- *Folder Structure:* Improved folder structure by creating Pure Components for Hotels, Countries, and Cities. 
+- *Tailwind CSS:* Removed the conventional CDN for Bootstrap and added TailwindCSS to utilize its *tree-shaking* method to minimize the CSS load of the application. 
+- *Update Deps:* Updated node dependencies with latest version to enhance this application's life.  
+
+**Improvements**
+- *Rate Limiting:* Implement the *rate-limiting middleware* in the backend to ensure that the search field is not abused. 
+- *Database Normalization:* 
+  - Store *countries._id* in *hotels* collection instead of *hotels.country* and *hotels.countryisocode*.
+  - Store *cities._id* in *hotels* collection instead of *city*.
+  - Separate collection for *chain_name* as a single chain_name can belong to multiple hotels. This way we can save the *chain_name._id* in *hotels* collection instead of the *chain_name::string*. 
+- *State Lift-Up:* When navigating back to the home page, search results disappear. Lifting up the state will ensure that the search string and the list will be saved.
 
 ### Database structure
 
