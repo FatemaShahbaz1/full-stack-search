@@ -1,11 +1,11 @@
 import { Routes, Route } from "react-router";
 import Home from "./pages/Home";
-import { Hotel } from "./pages/Hotel";
-import { Country } from "./pages/Country";
-import { City } from "./pages/City";
-import { HotelList } from "./pages/HotelList";
-import { CountryList } from "./pages/CountryList";
-import { CityList } from "./pages/CityList";
+import Hotel from "./pages/Hotel";
+import Country from "./pages/Country";
+import City from "./pages/City";
+import HotelList from "./pages/HotelList";
+import CountryList from "./pages/CountryList";
+import CityList from "./pages/CityList";
 
 function App() {
   return (

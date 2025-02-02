@@ -12,13 +12,6 @@ export class CountryController {
       // Validate query parameters
       const { page, limit, search } = searchParamsSchema.parse(req.query);
 
-      if (!search) {
-        res
-          .status(400)
-          .json({ total: 0, data: [], error: "Missing argument: search" });
-        return;
-      }
-
       // Fetch data from the service layer
       const data = await this.service.list(page, limit, search);
 

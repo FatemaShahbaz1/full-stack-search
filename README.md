@@ -91,19 +91,23 @@ For larger or more time-intensive changes, you're welcome to outline your ideas 
 <!-- Write-up/conclusion section -->
 
 **API**
-- *Utils Module:* Created a separate module for all the types, interfaces, and schemas. Also, added Zod for validating those schemas. 
+- *Utils Module:* Created a separate module for all the types, interfaces, and schemas. Also, added Zod for validating schemas. 
 - *SRR*: By using Single Responsibility Principle and Separation of Concern methodology, created separate Controllers, Services and Routes for the Entities of the application.
 - *KISS*: Used the widely known KISS(Keep It Simple, Stupid) design principle of Software Development by writing minimilistic code for what's needed. 
 - *YAGNI*: Used another Software Development Principle called YAGNI(You Ain't Gonna Need It) by not over-complicating the solution, but following the functional requirements as provided. 
 - *Folder Structure:* Improved folder structure of the entire API and used express package in its true capacity. 
-- *View All Feature:* Allowed user to view 5 items in the search bar and use "View all" button to view an extended version of the search. 
+- *Paginated Search:* Implemented pagination for the list views. 
 
 **CLIENT**
 - *Debounced Search:* Implemented a debounced search that takes 1000ms after the last key-stroke to begin search. It is to ensure that we are not hammering the database with useless queries. 
+- *View All Feature:* Allowed user to view 10 items in the search bar and use "View all" button to view an extended version of the search.
 - *TryHackMe Theme:* Used TryHackMe's search as an inspiration and updated the application's theme. 
 - *Folder Structure:* Improved folder structure by creating Pure Components for Hotels, Countries, and Cities. 
 - *Tailwind CSS:* Removed the conventional CDN for Bootstrap and added TailwindCSS to utilize its *tree-shaking* method to minimize the CSS load of the application. 
-- *Update Deps:* Updated node dependencies with latest version to enhance this application's life.  
+- *Update Deps:* Updated node dependencies with latest version to enhance this application's life.
+- *Improved UI:* Followed the semantics of HTML while creating UI. Kept UX principles in mind by displaying skeleton while loading data.
+- *Axios:* Implemented Axios for API calling to ensure common repository for calling endpoints. 
+- *Hooks Pattern:* Implemented hooks pattern to call endpoints via Hooks to ensure modularity of code. 
 
 **Improvements**
 - *Rate Limiting:* Implement the *rate-limiting middleware* in the backend to ensure that the search field is not abused. 
@@ -111,7 +115,8 @@ For larger or more time-intensive changes, you're welcome to outline your ideas 
   - Store *countries._id* in *hotels* collection instead of *hotels.country* and *hotels.countryisocode*.
   - Store *cities._id* in *hotels* collection instead of *city*.
   - Separate collection for *chain_name* as a single chain_name can belong to multiple hotels. This way we can save the *chain_name._id* in *hotels* collection instead of the *chain_name::string*. 
-- *State Lift-Up:* When navigating back to the home page, search results disappear. Lifting up the state will ensure that the search string and the list will be saved.
+- *State Lift-Up:* When navigating back to the home page, search results and search query disappears. Lifting up the state will ensure that the search string and the list will be saved.
+- *Error Handing:* A middle for error-handling in express. Also an interceptor in axios to process errors on frontend. 
 
 ### Database structure
 
